@@ -9,7 +9,7 @@ public class BallControll : MonoBehaviour {
 	[SerializeField] private Rigidbody rigidbodyBall; //Get the rigidbody of the ball.
 	[SerializeField] private float minCamDistance = 3f; //Get the min camera distance on how much the player ball can move from camera.
 	[SerializeField] private float maxCamDistance = 5f; //Get the max camera distance on how much the player ball can move from camera.
-
+   
 	public float AutoMovementSpeed = 2f; //The automatic movement speed of the player ball when the player is not touching it. This should be the same as the one in the camera.
 	private Vector2 lastMousePos; //Get last mouse position.
 	bool wingameGUI = false; //The GUI that will be displayed when game is won.
@@ -34,25 +34,28 @@ public class BallControll : MonoBehaviour {
 	}
 
 	void Update () {
-		Vector2 deltaPos = Vector2.zero;
 
-		if (Input.GetMouseButton(0)) {
-			
-			Vector2 currentMousePos = Input.mousePosition;
-
+        
+        Vector2 deltaPos = Vector2.zero;
+       
+		if (Input.GetMouseButton(0)) {          
+            Vector2 currentMousePos = Input.mousePosition; 
+           
 			if (lastMousePos == Vector2.zero)
 				lastMousePos = currentMousePos;
-
+           
 			deltaPos = currentMousePos - lastMousePos;
 			lastMousePos = currentMousePos;
 
 			Vector3 force = new Vector3(deltaPos.x, 0, deltaPos.y) * ThrustSpeed;
 			rigidbodyBall.AddForce(force);
-		} else {
+            transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+        } else {
 			lastMousePos = Vector2.zero;
 		}
 	}
 
+    
 	 void OnCollisionEnter (Collision col) {
 		if (col.gameObject.tag == "KillPlayer") {
 			gameoverGUI = true;
