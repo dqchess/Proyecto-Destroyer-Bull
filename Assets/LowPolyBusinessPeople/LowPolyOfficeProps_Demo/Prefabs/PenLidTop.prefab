@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4564903793384640}
   - component: {fileID: 33717301252872112}
   - component: {fileID: 23171403428823312}
-  - component: {fileID: 95076244814595702}
   - component: {fileID: 65071854327998144}
   m_Layer: 0
   m_Name: PenLidTop
@@ -37,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450521488085294}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,20 +93,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.15316325, y: 0.010537009, z: 0.010609305}
   m_Center: {x: -0.024638368, y: 0.00067454576, z: 9.313226e-10}
---- !u!95 &95076244814595702
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1450521488085294}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: cb6d8dfb89b89154cb28d2c78e341778, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

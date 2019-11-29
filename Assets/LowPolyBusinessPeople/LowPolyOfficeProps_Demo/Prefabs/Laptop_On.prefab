@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4225381643663648}
   - component: {fileID: 33384098434499110}
   - component: {fileID: 23394668275559980}
-  - component: {fileID: 95872406557638808}
   - component: {fileID: 65200176653086256}
   m_Layer: 0
   m_Name: Laptop_On
@@ -37,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1382680370001608}
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,20 +93,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4128768, y: 0.2859333, z: 0.3141266}
   m_Center: {x: 0, y: 0.160399, z: -0.017604299}
---- !u!95 &95872406557638808
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1382680370001608}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 76baa3562988f574695af0616b6c927d, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

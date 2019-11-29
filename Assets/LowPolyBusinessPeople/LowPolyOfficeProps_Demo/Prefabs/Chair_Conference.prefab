@@ -21,8 +21,7 @@ GameObject:
   - component: {fileID: 4629217466970814}
   - component: {fileID: 33133217334796580}
   - component: {fileID: 23631810374821934}
-  - component: {fileID: 95972071275465412}
-  - component: {fileID: 65525438746575868}
+  - component: {fileID: 65756482631432522}
   m_Layer: 0
   m_Name: Chair_Conference
   m_TagString: Untagged
@@ -37,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1862155987202886}
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,7 +81,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1862155987202886}
   m_Mesh: {fileID: 4300000, guid: 32d2b5fb7e61de84195cafe92d39b3ad, type: 3}
---- !u!65 &65525438746575868
+--- !u!65 &65756482631432522
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -94,20 +93,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.54470736, y: 0.8170257, z: 0.482822}
   m_Center: {x: 0, y: 0.40851286, z: -0.009905316}
---- !u!95 &95972071275465412
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1862155987202886}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 32d2b5fb7e61de84195cafe92d39b3ad, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

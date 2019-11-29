@@ -49,7 +49,9 @@ public class BallControll : MonoBehaviour {
 
 			Vector3 force = new Vector3(deltaPos.x, 0, deltaPos.y) * ThrustSpeed;
 			rigidbodyBall.AddForce(force);
-            transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+           transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+            /*Quaternion desiredRotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime *0.5f); */
         } else {
 			lastMousePos = Vector2.zero;
 		}
@@ -57,7 +59,7 @@ public class BallControll : MonoBehaviour {
 
     
 	 void OnCollisionEnter (Collision col) {
-		if (col.gameObject.tag == "KillPlayer") {
+		/*if (col.gameObject.tag == "KillPlayer") {
 			gameoverGUI = true;
 			this.gameObject.GetComponentInChildren<Renderer> ().enabled = false;
 			this.gameObject.GetComponentInChildren<Collider> ().enabled = false;
@@ -66,7 +68,7 @@ public class BallControll : MonoBehaviour {
 			Destroy (GameObject.FindWithTag("BackgroundMusic"));
 			GetComponent<AudioSource>().PlayOneShot(GameOverSound, 2.7F);
 			Die();
-		}
+		}*/
 
 		if (col.gameObject.tag == "WinGame") {
 			wingameGUI = true; 
