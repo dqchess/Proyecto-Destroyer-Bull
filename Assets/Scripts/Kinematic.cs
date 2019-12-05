@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Kinematic : MonoBehaviour
 {
-    Rigidbody rb;
+    Animator animator;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        rb.isKinematic = false;
+       if(collision.gameObject.tag == "Player")
+        animator.enabled = false;
     }
 }
