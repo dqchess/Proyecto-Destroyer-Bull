@@ -9,6 +9,7 @@ public class BallControll : MonoBehaviour {
 	[SerializeField] private Rigidbody rigidbodyBall; //Get the rigidbody of the ball.
 	[SerializeField] private float minCamDistance = 3f; //Get the min camera distance on how much the player ball can move from camera.
 	[SerializeField] private float maxCamDistance = 5f; //Get the max camera distance on how much the player ball can move from camera.
+    private int y_rotation = 0;
    
 	public float AutoMovementSpeed = 2f; //The automatic movement speed of the player ball when the player is not touching it. This should be the same as the one in the camera.
 	private Vector2 lastMousePos; //Get last mouse position.
@@ -30,30 +31,29 @@ public class BallControll : MonoBehaviour {
 
 	void Start () {
 		completeGameOverUI.gameObject.SetActive(false);
-		completeGameWonUI.gameObject.SetActive(false);
+		completeGameWonUI.gameObject.SetActive(false);       
 	}
 
 	void Update () {
 
         
         Vector2 deltaPos = Vector2.zero;
-       
-		if (Input.GetMouseButton(0)) {          
-            Vector2 currentMousePos = Input.mousePosition; 
-           
-			if (lastMousePos == Vector2.zero)
-				lastMousePos = currentMousePos;
-           
-			deltaPos = currentMousePos - lastMousePos;
-			lastMousePos = currentMousePos;
 
-			Vector3 force = new Vector3(deltaPos.x, 0, deltaPos.y) * ThrustSpeed;
-			rigidbodyBall.AddForce(force);
-           transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
-            /*Quaternion desiredRotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
-            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime *0.5f); */
+        if (Input.GetMouseButton(0)) {
+            Vector2 currentMousePos = Input.mousePosition;
+
+            if (lastMousePos == Vector2.zero)
+                lastMousePos = currentMousePos;
+
+            deltaPos = currentMousePos - lastMousePos;
+            lastMousePos = currentMousePos;
+
+            Vector3 force = new Vector3(deltaPos.x, 0, deltaPos.y) * ThrustSpeed;
+            rigidbodyBall.AddForce(force);
+            transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
         } else {
-			lastMousePos = Vector2.zero;
+            lastMousePos = Vector2.zero;
+            StartCoroutine(mouseLeft());
 		}
 	}
 
@@ -101,8 +101,16 @@ public class BallControll : MonoBehaviour {
 			pos.z = Camera.main.transform.position.z + maxCamDistance;
 		}
 
-		transform.position = pos;
+		transform.position = pos;      
 	}
+
+    private void checkRotation()
+    {
+       // Quaternion rot = transform.rotation;
+
+        transform.rotation = Quaternion.Euler(0, y_rotation, 0);
+
+    }
 
 	void Die() {
 		completeGameOverUI.gameObject.SetActive(true);
@@ -115,6 +123,12 @@ public class BallControll : MonoBehaviour {
 		currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 		PlayerPrefs.SetInt("SavedScene", currentSceneIndex);
 	}
+
+    IEnumerator mouseLeft()
+    {
+        yield return new WaitForSeconds(0.1f);
+        checkRotation();
+    }
 }
 
 		

@@ -44,8 +44,7 @@ public class BullsSelection : MonoBehaviour
     }
 
     public void select()
-    {
-        Debug.Log(bullChosenName);
+    {       
        foreach(GameObject bull in bullsGame)
         {
             if (bull.gameObject.name == bullChosenName)
