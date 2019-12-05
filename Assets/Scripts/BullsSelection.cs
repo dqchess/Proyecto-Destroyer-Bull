@@ -5,6 +5,7 @@ using UnityEngine;
 public class BullsSelection : MonoBehaviour
 {
     public List<Bull> bulls;
+    public List<GameObject> bull_shop;
     private int count;
     private string bullChosenName;
 
@@ -15,7 +16,7 @@ public class BullsSelection : MonoBehaviour
 
     public void bullChosen(int value)
     {
-        bulls[count].inStoreGameObject.SetActive(false);
+        bull_shop[count].SetActive(false);
         count += value;
 
         if (count < 0)
@@ -24,9 +25,9 @@ public class BullsSelection : MonoBehaviour
         if (count > bulls.Count - 1)
             count = 0;
 
-        for (int i = count; i < bulls.Count; i++)
+        for (int i = count; i < bull_shop.Count; i++)
         {
-            bulls[count].inStoreGameObject.SetActive(true);
+            bull_shop[count].SetActive(true);
         }
 
 
