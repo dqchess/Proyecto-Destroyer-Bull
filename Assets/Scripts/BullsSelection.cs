@@ -5,9 +5,9 @@ using UnityEngine;
 public class BullsSelection : MonoBehaviour
 {
     public List<Bull> bulls;
-    public List<GameObject> bull_shop;
-    private int count;
-    private string bullChosenName;
+    public List<GameObject> bulls_inGame;
+    public List<GameObject> bulls_shop;
+    private int count;   
 
     private void Start()
     {
@@ -16,31 +16,26 @@ public class BullsSelection : MonoBehaviour
 
     public void bullChosen(int value)
     {
-        bull_shop[count].SetActive(false);
+        Debug.Log("toco boton");
+        bulls_shop[count].SetActive(false);
         count += value;
-
+        Debug.Log(count);
         if (count < 0)
             count = bulls.Count - 1;
 
         if (count > bulls.Count - 1)
             count = 0;
 
-        for (int i = count; i < bull_shop.Count; i++)
+        for (int i = count; i < bulls_shop.Count; i++)
         {
-            bull_shop[count].SetActive(true);
+            bulls_shop[count].SetActive(true);
+        }
+    }
+
+        public void select()
+        {
+        bulls_inGame[count].SetActive(true);
         }
 
 
     }
-
-    public void select()
-    {
-        foreach (Bull bull in bulls)
-        {
-            if (bull.inGameGameObject.gameObject.name == bullChosenName)
-                bull.inGameGameObject.gameObject.SetActive(true);
-        }
-    }
-
-
-}
