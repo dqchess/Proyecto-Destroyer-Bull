@@ -3,42 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BullsSelection : MonoBehaviour
-{ 
-
-    public List<Bull> bulls;
+{
+    public List<GameObject> bullsMenu;
+    public List<GameObject> bullsGame;
     private int count;
     private string bullChosenName;
    
     private void Start()
     {
-        count = 0;            
+        count = 0;
+        bullChosenName = bullsMenu[0].name;        
     }
 
     public void bullChosen(int value)
     {
-        bulls[count].inStoreGameObject.SetActive(false);
+        bullsMenu[count].SetActive(false);
         count += value;
 
         if (count < 0)
-            count = bulls.Count-1;
+            count = bullsMenu.Count-1;
 
-        if (count > bulls.Count - 1)
+        if (count > bullsMenu.Count - 1)
             count = 0;
 
-        for(int i = count; i< bulls.Count;i++)
+        switch(count)
         {
-            bulls[count].inStoreGameObject.SetActive(true);
-        }
-
-             
+            case 0:
+                bullChosenName = bullsMenu[count].name;
+                bullsMenu[count].SetActive(true);
+                break;
+            case 1:
+                bullChosenName = bullsMenu[count].name;
+                bullsMenu[count].SetActive(true);
+                break;
+            case 2:
+                bullChosenName = bullsMenu[count].name;
+                bullsMenu[count].SetActive(true);
+                break;
+        }       
     }
 
     public void select()
     {       
-       foreach(Bull bull in bulls)
+       foreach(GameObject bull in bullsGame)
         {
-            if (bull.inGameGameObject.gameObject.name == bullChosenName)
-                bull.inGameGameObject.gameObject.SetActive(true);
+            if (bull.gameObject.name == bullChosenName)
+                bull.gameObject.SetActive(true);
         }
     }
 
