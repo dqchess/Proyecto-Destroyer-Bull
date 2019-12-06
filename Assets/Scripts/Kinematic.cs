@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Kinematic : MonoBehaviour
 {
-    Animator animator;
+    public GameObject male;
+    private Animator animator;
+    private Rigidbody rb;
+
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = male.GetComponent<Animator>();
+        rb = male.GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-       if(collision.gameObject.tag == "Player")
-        animator.enabled = false;
+        if (other.gameObject.tag == "Player" || other.gameObject.tag =="Male" || other.gameObject.tag == "Kill Player")
+        {
+            animator.enabled = false;
+            rb.isKinematic = false;
+        }
     }
+   
 }

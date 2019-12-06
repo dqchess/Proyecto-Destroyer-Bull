@@ -9,7 +9,7 @@ public class BallControll : MonoBehaviour {
 	[SerializeField] private Rigidbody rigidbodyBall; //Get the rigidbody of the ball.
 	[SerializeField] private float minCamDistance = 3f; //Get the min camera distance on how much the player ball can move from camera.
 	[SerializeField] private float maxCamDistance = 5f; //Get the max camera distance on how much the player ball can move from camera.
-    private int y_rotation = 0;
+    private int y__standard_rotation = 0;
    
 	public float AutoMovementSpeed = 2f; //The automatic movement speed of the player ball when the player is not touching it. This should be the same as the one in the camera.
 	private Vector2 lastMousePos; //Get last mouse position.
@@ -106,9 +106,11 @@ public class BallControll : MonoBehaviour {
 
     private void checkRotation()
     {
-       // Quaternion rot = transform.rotation;
+        Quaternion currentRotation = transform.rotation;        
+        Quaternion standardRotation = Quaternion.Euler(0, y__standard_rotation, 0);
+        float rotationSpeed = 2;
 
-        transform.rotation = Quaternion.Euler(0, y_rotation, 0);
+        transform.rotation = Quaternion.Slerp(currentRotation, standardRotation,Time.deltaTime * rotationSpeed);
 
     }
 
