@@ -19,8 +19,13 @@ public class Kinematic : MonoBehaviour
         if (other.gameObject.tag == "Player" || other.gameObject.tag =="Male" || other.gameObject.tag == "Kill Player")
         {
             animator.enabled = false;
-            rb.isKinematic = false;
+            rb.isKinematic = false;           
         }
+
+        if (other.gameObject.tag == "Disable")
+            male.gameObject.SetActive(false);
+
+       
     }
    
 }

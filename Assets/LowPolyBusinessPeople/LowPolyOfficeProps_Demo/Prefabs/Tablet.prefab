@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4402626770144814}
   - component: {fileID: 33108869697643918}
   - component: {fileID: 23191520334749994}
-  - component: {fileID: 95191649241108866}
   - component: {fileID: 65668122333127614}
   m_Layer: 0
   m_Name: Tablet
@@ -37,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817072745897592}
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,20 +93,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16803499, y: 0.235249, z: 0.01075424}
   m_Center: {x: 0, y: 0.14786498, z: 0}
---- !u!95 &95191649241108866
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1817072745897592}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b0e785b24d3dc2f46a3981184474a24e, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

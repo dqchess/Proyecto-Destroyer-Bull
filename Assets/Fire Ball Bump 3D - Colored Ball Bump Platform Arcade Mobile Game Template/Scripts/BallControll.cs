@@ -31,7 +31,7 @@ public class BallControll : MonoBehaviour {
 
 	void Start () {
 		completeGameOverUI.gameObject.SetActive(false);
-		completeGameWonUI.gameObject.SetActive(false);       
+		completeGameWonUI.gameObject.SetActive(false);      
 	}
 
 	void Update () {
