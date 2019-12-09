@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class DesactivateGameobjects : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private GameObject[] gameObjects;
 
-    private void FixedUpdate()
+    private void OnTriggerEnter(Collider other)
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
+        if (other.gameObject.tag == "Player")
+        {
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.SetActive(true);
+            }
+        }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Forniture" || collision.gameObject.tag == "Kill Player")
-        collision.gameObject.SetActive(false);
     }
-
 
 }
