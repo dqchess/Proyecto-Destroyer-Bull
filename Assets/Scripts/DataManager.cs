@@ -101,8 +101,6 @@ public class GameData
     public bool Bull_Pink_Unlock;
     public bool Bull_Purple_Unlock;
     public bool Bull_Orange_Unlock;
-    public bool Bull_White_Unlock;
-
-    //public bool[] bullsUnlocked = new bool[] 
+    public bool Bull_White_Unlock;   
 
 }

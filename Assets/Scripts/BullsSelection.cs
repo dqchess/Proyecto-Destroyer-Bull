@@ -15,11 +15,9 @@ public class BullsSelection : MonoBehaviour
     }
 
     public void bullChosen(int value)
-    {
-        Debug.Log("toco boton");
+    {        
         bulls_shop[count].SetActive(false);
-        count += value;
-        Debug.Log(count);
+        count += value;        
         if (count < 0)
             count = bulls.Count - 1;
 
@@ -30,6 +28,14 @@ public class BullsSelection : MonoBehaviour
         {
             bulls_shop[count].SetActive(true);
         }
+
+        /*bullsUnlocked es la lista static de la clase dataManager
+         * 
+         * if(count != 1)
+         * {
+         * if(bullunlocked[count -1])
+         * botonSelect.SetActive(True)
+         * }*/
     }
 
         public void select()
