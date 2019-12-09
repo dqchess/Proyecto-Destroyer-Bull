@@ -6,14 +6,15 @@ public class ActivateGameObjects : MonoBehaviour
 {
     [SerializeField] private GameObject[] gameObjects;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
             foreach (GameObject gameObject in gameObjects)
             {
-                gameObject.SetActive(false);
+                gameObject.SetActive(true);
             }
         }
-    }   
+        
+    }
 }

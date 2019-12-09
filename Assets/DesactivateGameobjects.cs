@@ -12,7 +12,7 @@ public class DesactivateGameobjects : MonoBehaviour
         {
             foreach (GameObject gameObject in gameObjects)
             {
-                gameObject.SetActive(true);
+                gameObject.SetActive(false);
             }
         }
 
