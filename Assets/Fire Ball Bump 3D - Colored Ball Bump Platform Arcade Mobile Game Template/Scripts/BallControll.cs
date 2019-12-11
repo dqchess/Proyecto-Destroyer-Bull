@@ -27,6 +27,9 @@ public class BallControll : MonoBehaviour {
 	public GameObject completeGameOverUI;
 	public GameObject completeGameWonUI;
 
+    public delegate void OnLevelFinished(bool decision);
+    public static event OnLevelFinished onLevelFinished;
+
 	private int currentSceneIndex; //This will get your current scene.
 
 	void Start () {
@@ -136,6 +139,7 @@ public class BallControll : MonoBehaviour {
 
 	void Win() {
 		completeGameWonUI.gameObject.SetActive(true);
+        onLevelFinished(false);
 		currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 		PlayerPrefs.SetInt("SavedScene", currentSceneIndex);
 	}
