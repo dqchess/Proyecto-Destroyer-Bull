@@ -59,7 +59,7 @@ public class BallControll : MonoBehaviour {
 
     
 	 void OnCollisionEnter (Collision col) {
-		/*if (col.gameObject.tag == "KillPlayer") {
+		if (col.gameObject.tag == "KillPlayer") {
 			gameoverGUI = true;
 			this.gameObject.GetComponentInChildren<Renderer> ().enabled = false;
 			this.gameObject.GetComponentInChildren<Collider> ().enabled = false;
@@ -68,7 +68,7 @@ public class BallControll : MonoBehaviour {
 			Destroy (GameObject.FindWithTag("BackgroundMusic"));
 			GetComponent<AudioSource>().PlayOneShot(GameOverSound, 2.7F);
 			Die();
-		}*/
+		}
 
 		if (col.gameObject.tag == "WinGame") {
 			wingameGUI = true; 
@@ -81,8 +81,22 @@ public class BallControll : MonoBehaviour {
 			Win();
 		}
 	}
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "KillPlayer")
+        {
+            gameoverGUI = true;
+            this.gameObject.GetComponentInChildren<Renderer>().enabled = false;
+            this.gameObject.GetComponentInChildren<Collider>().enabled = false;
+            foreach (Renderer r in GetComponentsInChildren<Renderer>())
+                r.enabled = false;
+            Destroy(GameObject.FindWithTag("BackgroundMusic"));
+            GetComponent<AudioSource>().PlayOneShot(GameOverSound, 2.7F);
+            Die();
+        }
+    }
 
-	private void FixedUpdate()
+        private void FixedUpdate()
 	{
 		rigidbodyBall.MovePosition(transform.position + Vector3.forward * AutoMovementSpeed * Time.fixedDeltaTime);
 	}

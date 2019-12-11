@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kinematic : MonoBehaviour
+public class Humans : MonoBehaviour
 {
     public GameObject male;
     private Animator animator;
-    private Rigidbody rb;   
+    private Rigidbody rb;
+
+    public delegate void OnAddCoins();
+    public static event OnAddCoins onAddCoins;
 
     void Start()
     {
@@ -20,10 +23,11 @@ public class Kinematic : MonoBehaviour
         {
             animator.enabled = false;
             rb.isKinematic = false;          
+        }  
+        if(other.gameObject.tag == "Player")
+        {
+            onAddCoins();
         }
-
-        if (other.gameObject.tag == "Disable")
-            male.gameObject.SetActive(false);       
     }
    
 }
