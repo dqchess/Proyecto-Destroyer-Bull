@@ -9,10 +9,7 @@ public class Shop : MonoBehaviour
     public delegate void OnBuySucced();
     public static event OnBuySucced onBuySucced;
 
-    private void Awake()
-    {
-        DataManager.load();
-    }
+  
 
     void Start()
     {

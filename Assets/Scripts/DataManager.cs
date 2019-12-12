@@ -20,7 +20,11 @@ public class DataManager : MonoBehaviour
     public static List<bool> bullsUnlocked = new List<bool>();
 
     private static string fileName = "/gamedata.dat";
-    
+
+    private void Awake()
+    {
+        load();
+    }
 
     public static void save()
     {
@@ -48,11 +52,12 @@ public class DataManager : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + fileName))
         {
+            Debug.Log("entro");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + fileName, FileMode.Open);
             GameData gamedata = (GameData)bf.Deserialize(file);
 
-            coins= gamedata.coins;
+            coins = gamedata.coins;
             Bull_Red_Unlock = gamedata.Bull_Red_Unlock;
             Bull_Yellow_Unlock = gamedata.Bull_Yellow_Unlock;
             Bull_Blue_Unlock = gamedata.Bull_Blue_Unlock;
@@ -75,6 +80,8 @@ public class DataManager : MonoBehaviour
 
             file.Close();
         }
+        else
+            save();
     }
 
     public static void updateCoins(int newCoins)
