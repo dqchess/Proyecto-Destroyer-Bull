@@ -14,7 +14,6 @@ public class CanvasGame : MonoBehaviour
     }
     public void deactivateUI(GameObject UI)
     {
-        Debug.Log("Entro");
         UI.SetActive(false);
     }
 

@@ -39,6 +39,10 @@ public class BullsSelection : MonoBehaviour
 
         public void select()
         {
+        foreach(GameObject bull in bulls_inGame)
+        {
+            bull.SetActive(false);
+        }
         bulls_inGame[count].SetActive(true);
         }
 
