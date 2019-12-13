@@ -7,8 +7,7 @@ public class ShopItem : MonoBehaviour
 {
     [SerializeField] Reward reward;
     [SerializeField] GameObject buttonImage;
-    [SerializeField] GameObject unlockedImage;
-    private List<bool> items;
+    [SerializeField] GameObject unlockedImage;   
 
     private void OnEnable()
     {
@@ -22,16 +21,13 @@ public class ShopItem : MonoBehaviour
 
     private void Awake()
     {
-        buttonImage.GetComponent<Image>().sprite = reward.spriteImage;             
+        buttonImage.GetComponent<Image>().sprite = reward.spriteImageShop;             
     }
 
     private void Start()
     {
-        /* if (DataManager.bullsUnlocked[reward.indexValue])
-            activateItemUnlockedImage(); */
-       /* items = DataManager.bullsUnlocked;
-        Debug.Log(items[0]);*/
-        
+         if (DataManager.bullsUnlocked[reward.indexValue])
+            activateItemUnlockedImage();      
     }
 
     private void activateItemUnlockedImage()

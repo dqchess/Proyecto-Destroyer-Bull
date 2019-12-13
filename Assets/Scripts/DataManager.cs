@@ -19,13 +19,23 @@ public class DataManager : MonoBehaviour
     public static bool Bull_White_Unlock;
     public static List<bool> bullsUnlocked = new List<bool>();
 
-    private static string fileName = "/gamedata.dat";
+    private static string fileName = "/matigamedata.dat";
 
     private void Awake()
     {
+        bullsUnlocked.Add(Bull_Red_Unlock);
+        bullsUnlocked.Add(Bull_Yellow_Unlock);
+        bullsUnlocked.Add(Bull_Blue_Unlock);
+        bullsUnlocked.Add(Bull_Black_Unlock);
+        bullsUnlocked.Add(Bull_Green_Unlock);
+        bullsUnlocked.Add(Bull_Pink_Unlock);
+        bullsUnlocked.Add(Bull_Purple_Unlock);
+        bullsUnlocked.Add(Bull_Orange_Unlock);
+        bullsUnlocked.Add(Bull_White_Unlock);
+       
         load();
     }
-
+    
     public static void save()
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -52,7 +62,6 @@ public class DataManager : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + fileName))
         {
-            Debug.Log("entro");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + fileName, FileMode.Open);
             GameData gamedata = (GameData)bf.Deserialize(file);
@@ -67,16 +76,7 @@ public class DataManager : MonoBehaviour
             Bull_Purple_Unlock = gamedata.Bull_Purple_Unlock;
             Bull_Orange_Unlock = gamedata.Bull_Orange_Unlock;
             Bull_White_Unlock = gamedata.Bull_White_Unlock;
-
-            bullsUnlocked.Add(Bull_Red_Unlock);
-            bullsUnlocked.Add(Bull_Yellow_Unlock);
-            bullsUnlocked.Add(Bull_Blue_Unlock);
-            bullsUnlocked.Add(Bull_Black_Unlock);
-            bullsUnlocked.Add(Bull_Green_Unlock);
-            bullsUnlocked.Add(Bull_Pink_Unlock);
-            bullsUnlocked.Add(Bull_Purple_Unlock);
-            bullsUnlocked.Add(Bull_Orange_Unlock);
-            bullsUnlocked.Add(Bull_White_Unlock);
+           
 
             file.Close();
         }

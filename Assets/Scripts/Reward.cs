@@ -7,6 +7,7 @@ public class Reward :ScriptableObject
 {
     public string name;
     public int shopValue;   
-    public Sprite spriteImage;
+    public Sprite spriteImageShop;
     public int indexValue;
+    public Sprite spriteBullSelection;
 }

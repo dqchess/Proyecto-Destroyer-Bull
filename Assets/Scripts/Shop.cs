@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
     private  int coins;
-
+    public Text coinText;
     public delegate void OnBuySucced();
     public static event OnBuySucced onBuySucced;
 
@@ -14,6 +15,7 @@ public class Shop : MonoBehaviour
     void Start()
     {
         coins = DataManager.coins;
+        coinText.text = coins.ToString();
     }
 
    

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
-
+    public GameObject partycleSystem;
     public delegate void OnAddCoins();
     public static event OnAddCoins onAddCoins;
 
@@ -13,6 +13,8 @@ public class Obstacles : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {            
             onAddCoins();
+            if(partycleSystem != null)
+            partycleSystem.GetComponent<ParticleSystem>().Play();
         }
     }
 }

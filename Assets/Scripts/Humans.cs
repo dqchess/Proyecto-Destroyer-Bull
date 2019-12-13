@@ -5,6 +5,7 @@ using UnityEngine;
 public class Humans : MonoBehaviour
 {
     public GameObject male;
+    public GameObject partycleSystem;
     private Animator animator;
     private Rigidbody rb;
 
@@ -26,6 +27,7 @@ public class Humans : MonoBehaviour
         }  
         if(other.gameObject.tag == "Player")
         {
+            partycleSystem.GetComponent<ParticleSystem>().Play();
             onAddCoins();
         }
     }
