@@ -32,4 +32,13 @@ public class Score : MonoBehaviour
     {
         coins += COIN_VALUE;
     }
+
+    public void setLevelScore(bool decision)
+    {
+        if (!decision)
+            DataManager.updateCoins(coins);
+        else
+            DataManager.updateCoins(coins *2);
+        //aca hay q checkear si vio la publicidad
+    }
 }

@@ -32,8 +32,10 @@ public class DataManager : MonoBehaviour
         bullsUnlocked.Add(Bull_Purple_Unlock);
         bullsUnlocked.Add(Bull_Orange_Unlock);
         bullsUnlocked.Add(Bull_White_Unlock);
-       
+      
         load();
+        Debug.Log(bullsUnlocked[3]);
+        Debug.Log(Bull_Black_Unlock);
     }
     
     public static void save()
@@ -67,15 +69,15 @@ public class DataManager : MonoBehaviour
             GameData gamedata = (GameData)bf.Deserialize(file);
 
             coins = gamedata.coins;
-            Bull_Red_Unlock = gamedata.Bull_Red_Unlock;
-            Bull_Yellow_Unlock = gamedata.Bull_Yellow_Unlock;
-            Bull_Blue_Unlock = gamedata.Bull_Blue_Unlock;
-            Bull_Black_Unlock = gamedata.Bull_Black_Unlock;
-            Bull_Green_Unlock = gamedata.Bull_Green_Unlock;
-            Bull_Pink_Unlock = gamedata.Bull_Pink_Unlock;
-            Bull_Purple_Unlock = gamedata.Bull_Purple_Unlock;
-            Bull_Orange_Unlock = gamedata.Bull_Orange_Unlock;
-            Bull_White_Unlock = gamedata.Bull_White_Unlock;
+            bullsUnlocked[0] = gamedata.Bull_Red_Unlock;
+            bullsUnlocked[1] = gamedata.Bull_Yellow_Unlock;
+            bullsUnlocked[2] = gamedata.Bull_Blue_Unlock;
+            bullsUnlocked[3] = gamedata.Bull_Black_Unlock;
+            bullsUnlocked[4] = gamedata.Bull_Green_Unlock;
+            bullsUnlocked[5] = gamedata.Bull_Pink_Unlock;
+            bullsUnlocked[6] = gamedata.Bull_Purple_Unlock;
+            bullsUnlocked[7] = gamedata.Bull_Orange_Unlock;
+            bullsUnlocked[8] = gamedata.Bull_White_Unlock;
            
 
             file.Close();
