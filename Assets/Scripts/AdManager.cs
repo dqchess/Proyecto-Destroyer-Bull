@@ -36,6 +36,7 @@ public class AdManager : MonoBehaviour
     }
 
 
+
     public void HandleRewardedAdLoaded(object sender, System.EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdLoaded event received");
@@ -75,8 +76,7 @@ public class AdManager : MonoBehaviour
     }
 
     private void createAndLoadRewardedAd()
-    {
-       
+    {       
         AdRequest request = new AdRequest.Builder().Build();       
         this.rewardedAd.LoadAd(request);
     }
