@@ -33,9 +33,7 @@ public class DataManager : MonoBehaviour
         bullsUnlocked.Add(Bull_Orange_Unlock);
         bullsUnlocked.Add(Bull_White_Unlock);
       
-        load();
-        Debug.Log(bullsUnlocked[3]);
-        Debug.Log(Bull_Black_Unlock);
+        load();       
     }
     
     public static void save()

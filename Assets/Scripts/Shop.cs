@@ -19,7 +19,7 @@ public class Shop : MonoBehaviour
     }
 
    
-    public void unlockItem(Reward reward)
+    public void unlockItem(Reward1 reward)
     {
         if(coins > reward.shopValue)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Reward",menuName ="New Reward")]
-public class Reward :ScriptableObject
+public class Reward1 :ScriptableObject
 {
     public string name;
     public int shopValue;   

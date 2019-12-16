@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour
 {
-    [SerializeField] Reward reward;
+    [SerializeField] Reward1 reward;
     [SerializeField] GameObject buttonImage;
     [SerializeField] GameObject unlockedImage;   
 
