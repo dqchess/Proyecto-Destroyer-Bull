@@ -8,21 +8,26 @@ public class Score : MonoBehaviour
     private int coins;
     private const int COIN_VALUE = 50;
     public Text coinText;
+    private bool playerWatchAd;
+    
 
     private void OnEnable()
     {
         Obstacles.onAddCoins += addCoins;
         Humans.onAddCoins += addCoins;
+        AdManager.playerRewarded += setLevelScore;
     }
     private void OnDisable()
     {
-        Obstacles.onAddCoins += addCoins;
-        Humans.onAddCoins += addCoins;
+        Obstacles.onAddCoins -= addCoins;
+        Humans.onAddCoins -= addCoins;
+        AdManager.playerRewarded -= setLevelScore;
     }
 
     private void Start()
     {
         coins = 0;
+        playerWatchAd = false;
     }
     private void Update()
     {
@@ -35,10 +40,15 @@ public class Score : MonoBehaviour
 
     public void setLevelScore(bool decision)
     {
-        if (!decision)
+        if (!decision && !playerWatchAd)
             DataManager.updateCoins(coins);
+        else if (decision)
+        {
+            coins *= 2;
+            DataManager.updateCoins(coins);
+            playerWatchAd = true;           
+        }
         else
-            DataManager.updateCoins(coins *2);
-        //aca hay q checkear si vio la publicidad
+            return;       
     }
 }

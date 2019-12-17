@@ -9,6 +9,19 @@ public class AdManager : MonoBehaviour
     private RewardedAd rewardedAd;
     private string rewardedAdID = "ca-app-pub-3940256099942544/5224354917";
 
+    public delegate void PlayerRewarded(bool decision);
+    public static event PlayerRewarded playerRewarded;
+
+    private void OnEnable()
+    {
+        WatchAd.showAd += userChoseToWatchAd;
+    }
+
+    private void OnDisable()
+    {
+        WatchAd.showAd -= userChoseToWatchAd;
+    }
+
     public void Start()
     {       
         MobileAds.Initialize(initStatus => { });
@@ -30,8 +43,8 @@ public class AdManager : MonoBehaviour
         this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         // Called when the ad is closed.
         this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
-        // Load the rewarded ad with the request.
 
+        // Load the rewarded ad with the request.
         this.rewardedAd.LoadAd(request);
     }
 
@@ -68,11 +81,7 @@ public class AdManager : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        string type = args.Type;
-        double amount = args.Amount;
-        MonoBehaviour.print(
-            "HandleRewardedAdRewarded event received for "
-                        + amount.ToString() + " " + type);
+        playerRewarded(true);
     }
 
     private void createAndLoadRewardedAd()

@@ -27,7 +27,9 @@ public class Humans : MonoBehaviour
         }  
         if(other.gameObject.tag == "Player")
         {
+            if(partycleSystem != null)
             partycleSystem.GetComponent<ParticleSystem>().Play();
+
             onAddCoins();
         }
     }
