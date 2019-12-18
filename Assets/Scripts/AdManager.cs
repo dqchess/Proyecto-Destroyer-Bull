@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AdManager : MonoBehaviour
 {
+    private bool playerIsAlive;
 
     private RewardedAd rewardedAd;
     private string rewardedAdID = "ca-app-pub-3940256099942544/5224354917";
@@ -12,18 +13,25 @@ public class AdManager : MonoBehaviour
     public delegate void PlayerRewarded(bool decision);
     public static event PlayerRewarded playerRewarded;
 
+    public delegate void PlayerCotinue();
+    public static event PlayerCotinue playerContinue;
+
     private void OnEnable()
     {
         WatchAd.showAd += userChoseToWatchAd;
+        BallControll.onPlayerdeath += updatePlayerStatus;
     }
 
     private void OnDisable()
     {
         WatchAd.showAd -= userChoseToWatchAd;
+        BallControll.onPlayerdeath -= updatePlayerStatus;
     }
 
     public void Start()
-    {       
+    {
+        playerIsAlive = true;
+
         MobileAds.Initialize(initStatus => { });
 
         this.rewardedAd = new RewardedAd(rewardedAdID);
@@ -81,7 +89,10 @@ public class AdManager : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        playerRewarded(true);
+        if (playerIsAlive)
+            playerRewarded(true);
+        else
+            playerContinue();
     }
 
     private void createAndLoadRewardedAd()
@@ -95,5 +106,10 @@ public class AdManager : MonoBehaviour
         {
             this.rewardedAd.Show();
         }
+    }
+
+    private void updatePlayerStatus()
+    {
+        playerIsAlive = false;
     }
 }
