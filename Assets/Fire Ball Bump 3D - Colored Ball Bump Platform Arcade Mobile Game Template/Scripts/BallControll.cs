@@ -30,17 +30,19 @@ public class BallControll : MonoBehaviour {
 
     private int currentSceneIndex; //This will get your current scene.
 
-    public delegate void OnPlayerDeath();
+    public delegate void OnPlayerDeath(bool status);
     public static event OnPlayerDeath onPlayerdeath;
 
     private void OnEnable()
     {
         AdManager.playerContinue += playerContinue;
+        Resume.onGameResume += restoreCollider;
     }
 
     private void OnDisable()
     {
         AdManager.playerContinue -= playerContinue;
+        Resume.onGameResume -= restoreCollider;
     }
 
     void Start() {
@@ -64,22 +66,39 @@ public class BallControll : MonoBehaviour {
 
             Vector3 force = new Vector3(deltaPos.x, 0, deltaPos.y) * ThrustSpeed;
             rigidbodyBall.AddForce(force);
-            transform.rotation = Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+            transform.rotation =  Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+
+           
+
         } else {
             lastMousePos = Vector2.zero;
             StartCoroutine(mouseLeft());
         }
+
+
+        Quaternion current = transform.rotation;
+        
+
+        if (current.y >0.99 || current.y < -0.99)
+        {
+            StartCoroutine(changeRotation());
+        }      
     }
 
-
+    IEnumerator changeRotation()
+    {
+        Quaternion standardRotationPositive = Quaternion.Euler(0, 0, 0);
+        yield return new WaitForSeconds(2f);
+        transform.rotation = standardRotationPositive;
+    }
     void OnCollisionEnter(Collision col) {
         if (col.gameObject.tag == "KillPlayer") {
             gameoverGUI = true;
-            /*this.gameObject.GetComponentInChildren<Renderer> ().enabled = false;
-			this.gameObject.GetComponentInChildren<Collider> ().enabled = false;
+            /*this.gameObject.GetComponentInChildren<Renderer> ().enabled = false;			
 			foreach (Renderer r in GetComponentsInChildren<Renderer>())
 			r.enabled = false;
 			Destroy (GameObject.FindWithTag("BackgroundMusic"));*/
+            this.gameObject.GetComponent<Collider>().enabled = false;
             GetComponent<AudioSource>().PlayOneShot(GameOverSound, 2.7F);
             Die();
         }
@@ -100,11 +119,11 @@ public class BallControll : MonoBehaviour {
         if (col.gameObject.tag == "KillPlayer")
         {
             gameoverGUI = true;
-            /* this.gameObject.GetComponentInChildren<Renderer>().enabled = false;
-             this.gameObject.GetComponentInChildren<Collider>().enabled = false;
+            /* this.gameObject.GetComponentInChildren<Renderer>().enabled = false;             
              foreach (Renderer r in GetComponentsInChildren<Renderer>())
                  r.enabled = false;
              Destroy(GameObject.FindWithTag("BackgroundMusic"));*/
+            this.gameObject.GetComponent<Collider>().enabled = false;
             GetComponent<AudioSource>().PlayOneShot(GameOverSound, 2.7F);
             Die();
         }
@@ -113,6 +132,7 @@ public class BallControll : MonoBehaviour {
     private void FixedUpdate()
     {
         rigidbodyBall.MovePosition(transform.position + Vector3.forward * AutoMovementSpeed * Time.fixedDeltaTime);
+      
     }
 
     void LateUpdate() {
@@ -146,7 +166,7 @@ public class BallControll : MonoBehaviour {
         completeGameOverUI.gameObject.SetActive(true);
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("SavedScene", currentSceneIndex);
-        onPlayerdeath();
+        onPlayerdeath(false);
         Time.timeScale = 0;
     }
 
@@ -164,8 +184,18 @@ public class BallControll : MonoBehaviour {
 
     private void playerContinue()
     {
-        buttonContinue.SetActive(true);
+        buttonContinue.SetActive(true);      
     }   
+
+    private void restoreCollider()
+    {
+        StartCoroutine(restoreColliderProcess());
+    }
+    IEnumerator restoreColliderProcess()
+    {
+        yield return new WaitForSeconds(1);
+        this.gameObject.GetComponent<Collider>().enabled = true;
+    }
 }
 
 		

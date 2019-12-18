@@ -7,7 +7,8 @@ public class ShopItem : MonoBehaviour
 {
     [SerializeField] Reward1 reward;
     [SerializeField] GameObject buttonImage;
-    [SerializeField] GameObject unlockedImage;   
+    [SerializeField] GameObject unlockedImage;
+    [SerializeField] Text valueText;
 
     private void OnEnable()
     {
@@ -26,6 +27,7 @@ public class ShopItem : MonoBehaviour
 
     private void Start()
     {
+        valueText.text = reward.shopValue.ToString();
          if (DataManager.bullsUnlocked[reward.indexValue])
             activateItemUnlockedImage();      
     }

@@ -33,47 +33,12 @@ public class AdManager : MonoBehaviour
         playerIsAlive = true;
 
         MobileAds.Initialize(initStatus => { });
-
-        this.rewardedAd = new RewardedAd(rewardedAdID);
-
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-
-        // Called when an ad request has successfully loaded.
-        this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
-        // Called when an ad request failed to load.
-        this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
-        // Called when an ad is shown.
-        this.rewardedAd.OnAdOpening += HandleRewardedAdOpening;
-        // Called when an ad request failed to show.
-        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
-        // Called when the user should be rewarded for interacting with the ad.
-        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
-        // Called when the ad is closed.
-        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
-
-        // Load the rewarded ad with the request.
-        this.rewardedAd.LoadAd(request);
+        createAndLoadRewardedAd();
     }
 
 
 
-    public void HandleRewardedAdLoaded(object sender, System.EventArgs args)
-    {
-        MonoBehaviour.print("HandleRewardedAdLoaded event received");
-    }
-
-    public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
-    {
-        MonoBehaviour.print(
-            "HandleRewardedAdFailedToLoad event received with message: "
-                             + args.Message);
-    }
-
-    public void HandleRewardedAdOpening(object sender, System.EventArgs args)
-    {
-        MonoBehaviour.print("HandleRewardedAdOpening event received");
-    }
+    
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
     {
@@ -92,12 +57,24 @@ public class AdManager : MonoBehaviour
         if (playerIsAlive)
             playerRewarded(true);
         else
+        {
             playerContinue();
+            updatePlayerStatus(true);
+        }
+           
     }
 
     private void createAndLoadRewardedAd()
-    {       
-        AdRequest request = new AdRequest.Builder().Build();       
+    {
+        this.rewardedAd = new RewardedAd(rewardedAdID);
+
+        AdRequest request = new AdRequest.Builder().Build();
+
+        this.rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        this.rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+
+
         this.rewardedAd.LoadAd(request);
     }
     public void userChoseToWatchAd()
@@ -108,8 +85,8 @@ public class AdManager : MonoBehaviour
         }
     }
 
-    private void updatePlayerStatus()
+    private void updatePlayerStatus(bool status)
     {
-        playerIsAlive = false;
+        playerIsAlive = status;
     }
 }
