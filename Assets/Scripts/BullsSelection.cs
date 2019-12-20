@@ -36,7 +36,7 @@ public class BullsSelection : MonoBehaviour
        
     }
 
-    public void select()
+    public void select() // aca lo activa siempre, si no esta desbloqueado no debe permitir esto
     {
        foreach(GameObject bull in bulls_inGame)
        {

@@ -11,6 +11,7 @@ public class Humans : MonoBehaviour
 
     public delegate void OnAddCoins();
     public static event OnAddCoins onAddCoins;
+    public List<AudioClip> sounds;
 
     void Start()
     {
@@ -30,8 +31,20 @@ public class Humans : MonoBehaviour
             if(partycleSystem != null)
             partycleSystem.GetComponent<ParticleSystem>().Play();
 
+            playSound();
             onAddCoins();
         }
     }
+
+    private void playSound()
+    {
+        int rand1 = Random.Range(0, 100);
+        if(rand1 <50)
+        {
+            int rand = Random.Range(0, sounds.Count);
+            GetComponent<AudioSource>().PlayOneShot(sounds[rand]);
+        }
+    }
+       
    
 }

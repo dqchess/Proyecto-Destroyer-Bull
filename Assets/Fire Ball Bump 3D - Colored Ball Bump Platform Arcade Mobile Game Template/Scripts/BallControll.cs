@@ -23,6 +23,10 @@ public class BallControll : MonoBehaviour {
                               //public Texture NextGameButtonHUD; //The next level HUD button that will display when the game ends.
     public AudioClip GameOverSound; //The sound that will play when the player dies and game is lost.
     public AudioClip WinGameSound; //The sound that will play when the player completes the level.
+   
+
+    public AudioSource audiosSourceFinalSounds;
+    public AudioSource audioSourceSteps;
 
     public GameObject completeGameOverUI;
     public GameObject completeGameWonUI;
@@ -85,12 +89,7 @@ public class BallControll : MonoBehaviour {
         }      
     }
 
-    IEnumerator changeRotation()
-    {
-        Quaternion standardRotationPositive = Quaternion.Euler(0, 0, 0);
-        yield return new WaitForSeconds(2f);
-        transform.rotation = standardRotationPositive;
-    }
+   
     void OnCollisionEnter(Collision col) {
         if (col.gameObject.tag == "KillPlayer") {
             gameoverGUI = true;
@@ -99,7 +98,7 @@ public class BallControll : MonoBehaviour {
 			r.enabled = false;
 			Destroy (GameObject.FindWithTag("BackgroundMusic"));*/
             this.gameObject.GetComponent<Collider>().enabled = false;
-            GetComponent<AudioSource>().PlayOneShot(GameOverSound, 2.7F);
+            audiosSourceFinalSounds.PlayOneShot(GameOverSound, 2.7F);
             Die();
         }
 
@@ -110,7 +109,7 @@ public class BallControll : MonoBehaviour {
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
                 r.enabled = false;
             Destroy(GameObject.FindWithTag("BackgroundMusic"));
-            GetComponent<AudioSource>().PlayOneShot(WinGameSound, 2.7F);
+            audiosSourceFinalSounds.PlayOneShot(WinGameSound, 2.7F);
             Win();
         }
     }
@@ -124,7 +123,7 @@ public class BallControll : MonoBehaviour {
                  r.enabled = false;
              Destroy(GameObject.FindWithTag("BackgroundMusic"));*/
             this.gameObject.GetComponent<Collider>().enabled = false;
-            GetComponent<AudioSource>().PlayOneShot(GameOverSound, 2.7F);
+            audiosSourceFinalSounds.PlayOneShot(GameOverSound, 2.7F);
             Die();
         }
     }
@@ -174,31 +173,49 @@ public class BallControll : MonoBehaviour {
         completeGameWonUI.gameObject.SetActive(true);
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         PlayerPrefs.SetInt("SavedScene", currentSceneIndex);
+        playStepSound(false);
     }
 
-    IEnumerator mouseLeft()
-    {
-        yield return new WaitForSeconds(0.1f);
-        checkRotation();
-    }
+   
 
     private void playerContinue()
     {
         buttonContinue.SetActive(true);      
-    }   
-
+    } 
     private void restoreCollider()
     {
         StartCoroutine(restoreColliderProcess());
+    }
+
+    public void playStepSound(bool change)
+    {
+        if (change)
+            audioSourceSteps.Play();
+        else
+            audioSourceSteps.Stop();
+    }
+    #region coroutines
+    IEnumerator mouseLeft()
+    {
+        yield return new WaitForSeconds(0.1f);
+        checkRotation();
     }
     IEnumerator restoreColliderProcess()
     {
         yield return new WaitForSeconds(1);
         this.gameObject.GetComponent<Collider>().enabled = true;
     }
+    IEnumerator changeRotation()
+    {
+        Quaternion standardRotationPositive = Quaternion.Euler(0, 0, 0);
+        yield return new WaitForSeconds(2f);
+        transform.rotation = standardRotationPositive;
+    }
+
+    #endregion
 }
 
-		
-		
+
+
 
 
