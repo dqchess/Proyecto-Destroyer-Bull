@@ -33,7 +33,8 @@ public class DataManager : MonoBehaviour
         bullsUnlocked.Add(Bull_Orange_Unlock);
         bullsUnlocked.Add(Bull_White_Unlock);
       
-        load();       
+        load();
+        Debug.Log(coins);
     }
     
     public static void save()
@@ -55,7 +56,6 @@ public class DataManager : MonoBehaviour
 
 
         bf.Serialize(file, gameData);
-
         file.Close();
     }
     public static void load()
@@ -85,8 +85,10 @@ public class DataManager : MonoBehaviour
     }
 
     public static void updateCoins(int newCoins)
-    {
+    {        
         coins += newCoins;
+        Debug.Log("coins: " + coins);
+        Debug.Log("newcoins: " + newCoins);
         save();
     }
     public static void unlockBull(int index)

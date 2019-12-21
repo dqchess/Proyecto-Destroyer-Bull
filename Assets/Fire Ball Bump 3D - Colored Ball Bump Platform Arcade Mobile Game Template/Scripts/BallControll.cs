@@ -25,9 +25,9 @@ public class BallControll : MonoBehaviour {
     public AudioClip WinGameSound; //The sound that will play when the player completes the level.
    
 
-    public AudioSource audiosSourceFinalSounds;
-    public AudioSource audioSourceSteps;
+    public AudioSource audiosSourceFinalSounds;   
 
+    
     public GameObject completeGameOverUI;
     public GameObject completeGameWonUI;
     public GameObject buttonContinue;
@@ -40,13 +40,13 @@ public class BallControll : MonoBehaviour {
     private void OnEnable()
     {
         AdManager.playerContinue += playerContinue;
-        Resume.onGameResume += restoreCollider;
+        Resume.onGameResume += restoreCollider;       
     }
 
     private void OnDisable()
     {
         AdManager.playerContinue -= playerContinue;
-        Resume.onGameResume -= restoreCollider;
+        Resume.onGameResume -= restoreCollider;      
     }
 
     void Start() {
@@ -109,6 +109,7 @@ public class BallControll : MonoBehaviour {
             foreach (Renderer r in GetComponentsInChildren<Renderer>())
                 r.enabled = false;
             Destroy(GameObject.FindWithTag("BackgroundMusic"));
+            Destroy(GameObject.FindWithTag("BullSounds"));
             audiosSourceFinalSounds.PlayOneShot(WinGameSound, 2.7F);
             Win();
         }
@@ -172,8 +173,7 @@ public class BallControll : MonoBehaviour {
     void Win() {
         completeGameWonUI.gameObject.SetActive(true);
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        PlayerPrefs.SetInt("SavedScene", currentSceneIndex);
-        playStepSound(false);
+        PlayerPrefs.SetInt("SavedScene", currentSceneIndex);      
     }
 
    
@@ -185,15 +185,8 @@ public class BallControll : MonoBehaviour {
     private void restoreCollider()
     {
         StartCoroutine(restoreColliderProcess());
-    }
-
-    public void playStepSound(bool change)
-    {
-        if (change)
-            audioSourceSteps.Play();
-        else
-            audioSourceSteps.Stop();
-    }
+    }    
+  
     #region coroutines
     IEnumerator mouseLeft()
     {
@@ -210,7 +203,7 @@ public class BallControll : MonoBehaviour {
         Quaternion standardRotationPositive = Quaternion.Euler(0, 0, 0);
         yield return new WaitForSeconds(2f);
         transform.rotation = standardRotationPositive;
-    }
+    }    
 
     #endregion
 }

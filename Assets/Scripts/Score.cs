@@ -8,7 +8,7 @@ public class Score : MonoBehaviour
     private int coins;
     private const int COIN_VALUE = 50;
     public Text coinText;
-    private bool playerWatchAd;
+   // private bool playerWatchAd;
     
 
     private void OnEnable()
@@ -27,28 +27,29 @@ public class Score : MonoBehaviour
     private void Start()
     {
         coins = 0;
-        playerWatchAd = false;
+        //playerWatchAd = false;
     }
     private void Update()
     {
         coinText.text = coins.ToString();
+       // Debug.Log(coins);
     }
     private void addCoins()
-    {
+    {       
         coins += COIN_VALUE;
+        PlayerPrefs.SetInt("coins", coins);
     }
 
     public void setLevelScore(bool decision)
     {
-        if (!decision && !playerWatchAd)
+        coins = PlayerPrefs.GetInt("coins");
+        Debug.Log(coins);
+        if (!decision )
             DataManager.updateCoins(coins);
         else if (decision)
         {
             coins *= 2;
-            DataManager.updateCoins(coins);
-            playerWatchAd = true;           
-        }
-        else
-            return;       
+            DataManager.updateCoins(coins);                     
+        }             
     }
 }

@@ -24,26 +24,23 @@ public class Humans : MonoBehaviour
         if (other.gameObject.tag == "Player" || other.gameObject.tag =="Male" || other.gameObject.tag == "Kill Player")
         {
             animator.enabled = false;
-            rb.isKinematic = false;          
+            rb.isKinematic = false;
+            playSound();
         }  
         if(other.gameObject.tag == "Player")
         {
             if(partycleSystem != null)
             partycleSystem.GetComponent<ParticleSystem>().Play();
-
-            playSound();
+          
             onAddCoins();
         }
     }
 
     private void playSound()
-    {
-        int rand1 = Random.Range(0, 100);
-        if(rand1 <50)
-        {
+    {         
             int rand = Random.Range(0, sounds.Count);
-            GetComponent<AudioSource>().PlayOneShot(sounds[rand]);
-        }
+        if(GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(sounds[rand]);  
     }
        
    

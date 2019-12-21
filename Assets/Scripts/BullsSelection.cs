@@ -22,11 +22,13 @@ public class BullsSelection : MonoBehaviour
         if (count < 0)
             count = bulls_inGame.Count - 1;
 
-        if (count > bulls_inGame.Count - 1)
+        else if (count > bulls_inGame.Count - 1)
             count = 0;
 
-        if(count!= 0)
+          if(count!= 0)
           checkItemUnlocked();
+          else
+            buttonSelect.SetActive(true);
         
 
         for (int i = count; i < bulls_shop.Count; i++)
@@ -36,14 +38,17 @@ public class BullsSelection : MonoBehaviour
        
     }
 
-    public void select() // aca lo activa siempre, si no esta desbloqueado no debe permitir esto
+    public void select() // permite activar cualquier toro en escena por mas q no este desbloqueado, arreglar
     {
        foreach(GameObject bull in bulls_inGame)
        {
           bull.SetActive(false);
        }
 
-        bulls_inGame[count].SetActive(true);
+        if (count !=0 && DataManager.bullsUnlocked[count - 1])
+            bulls_inGame[count].SetActive(true);
+        else
+            bulls_inGame[0].SetActive(true);
     }
 
     private void checkItemUnlocked()

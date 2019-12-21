@@ -29,11 +29,12 @@ public class ShopItem : MonoBehaviour
     {
         valueText.text = reward.shopValue.ToString();
          if (DataManager.bullsUnlocked[reward.indexValue])
-            activateItemUnlockedImage();      
+            activateItemUnlockedImage(this.reward.name);      
     }
 
-    private void activateItemUnlockedImage()
+    private void activateItemUnlockedImage(string name)
     {
+        if(reward.name == name)
         unlockedImage.SetActive(true);
     }
 }

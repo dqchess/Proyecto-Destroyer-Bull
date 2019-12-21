@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CanvasGame : MonoBehaviour
 {
+    public delegate void OnGameStarted(bool decision);
+    public static event OnGameStarted onGameStarded;
+
     private void Awake()
     {
         Time.timeScale = 0; // sacar pausa, poner velocidad del toro a 0 y realizar alguna accion como el fade
@@ -18,7 +21,7 @@ public class CanvasGame : MonoBehaviour
     }
 
     public void play()
-    {
-        Time.timeScale = 1; // aca restaurariamos la velocidad del toro para empezar
+    {      
+        Time.timeScale = 1; // aca restaurariamos la velocidad del toro para empezar       
     }
 }
