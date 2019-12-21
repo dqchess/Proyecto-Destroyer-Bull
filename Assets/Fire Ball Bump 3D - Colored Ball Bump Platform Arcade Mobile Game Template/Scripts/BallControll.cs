@@ -70,9 +70,7 @@ public class BallControll : MonoBehaviour {
 
             Vector3 force = new Vector3(deltaPos.x, 0, deltaPos.y) * ThrustSpeed;
             rigidbodyBall.AddForce(force);
-            transform.rotation =  Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
-
-           
+            transform.rotation =  Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);           
 
         } else {
             lastMousePos = Vector2.zero;
@@ -83,13 +81,38 @@ public class BallControll : MonoBehaviour {
         Quaternion current = transform.rotation;
         
 
-        if (current.y >0.99 || current.y < -0.99)
+        if (current.y >0.45 )
         {
-            StartCoroutine(changeRotation());
-        }      
+            transform.rotation = Quaternion.Euler(0, 45, 0);
+        }   
+        if(current.y < -.45)
+            transform.rotation = Quaternion.Euler(0, -45, 0);
+    }
+    private void FixedUpdate()
+    {
+        rigidbodyBall.MovePosition(transform.position + Vector3.forward * AutoMovementSpeed * Time.fixedDeltaTime);
+
     }
 
-   
+    void LateUpdate()
+    {
+
+        Vector3 pos = transform.position;
+
+        if (transform.position.z < Camera.main.transform.position.z + minCamDistance)
+        {
+            pos.z = Camera.main.transform.position.z + minCamDistance;
+        }
+
+        if (transform.position.z > Camera.main.transform.position.z + maxCamDistance)
+        {
+            pos.z = Camera.main.transform.position.z + maxCamDistance;
+        }
+
+        transform.position = pos;
+    }
+
+    #region collisions
     void OnCollisionEnter(Collision col) {
         if (col.gameObject.tag == "KillPlayer") {
             gameoverGUI = true;
@@ -128,29 +151,9 @@ public class BallControll : MonoBehaviour {
             Die();
         }
     }
+    #endregion
 
-    private void FixedUpdate()
-    {
-        rigidbodyBall.MovePosition(transform.position + Vector3.forward * AutoMovementSpeed * Time.fixedDeltaTime);
-      
-    }
-
-    void LateUpdate() {
-
-        Vector3 pos = transform.position;
-
-        if (transform.position.z < Camera.main.transform.position.z + minCamDistance)
-        {
-            pos.z = Camera.main.transform.position.z + minCamDistance;
-        }
-
-        if (transform.position.z > Camera.main.transform.position.z + maxCamDistance)
-        {
-            pos.z = Camera.main.transform.position.z + maxCamDistance;
-        }
-
-        transform.position = pos;
-    }
+   
 
     private void checkRotation()
     {
@@ -197,12 +200,6 @@ public class BallControll : MonoBehaviour {
     {
         yield return new WaitForSeconds(1);
         this.gameObject.GetComponent<Collider>().enabled = true;
-    }
-    IEnumerator changeRotation()
-    {
-        Quaternion standardRotationPositive = Quaternion.Euler(0, 0, 0);
-        yield return new WaitForSeconds(2f);
-        transform.rotation = standardRotationPositive;
     }    
 
     #endregion
