@@ -70,23 +70,27 @@ public class BallControll : MonoBehaviour {
 
             Vector3 force = new Vector3(deltaPos.x, 0, deltaPos.y) * ThrustSpeed;
             rigidbodyBall.AddForce(force);
-            transform.rotation =  Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);           
+
+
+           // transform.rotation =  Quaternion.LookRotation(GetComponent<Rigidbody>().velocity);
+            
+            Debug.Log(deltaPos.x);
+
+            if (deltaPos.x < -45)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -45, 0), Time.deltaTime * 5);
+            if (deltaPos.x > 45)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 45, 0), Time.deltaTime * 5);
+            if (deltaPos.x > -45 && deltaPos.x < 45)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5);
+
 
         } else {
-            lastMousePos = Vector2.zero;
-            StartCoroutine(mouseLeft());
+            
+            lastMousePos = Vector2.zero;           
+           // StartCoroutine(mouseLeft());
         }
 
 
-        Quaternion current = transform.rotation;
-        
-
-        if (current.y >0.45 )
-        {
-            transform.rotation = Quaternion.Euler(0, 45, 0);
-        }   
-        if(current.y < -.45)
-            transform.rotation = Quaternion.Euler(0, -45, 0);
     }
     private void FixedUpdate()
     {
@@ -156,7 +160,7 @@ public class BallControll : MonoBehaviour {
    
 
     private void checkRotation()
-    {
+    {       
         Quaternion currentRotation = transform.rotation;
         Quaternion standardRotation = Quaternion.Euler(0, y__standard_rotation, 0);
         float rotationSpeed = 2;
@@ -193,7 +197,7 @@ public class BallControll : MonoBehaviour {
     #region coroutines
     IEnumerator mouseLeft()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1);
         checkRotation();
     }
     IEnumerator restoreColliderProcess()
