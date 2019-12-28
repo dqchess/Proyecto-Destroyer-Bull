@@ -76,11 +76,11 @@ public class BallControll : MonoBehaviour {
             
             Debug.Log(deltaPos.x);
 
-            if (deltaPos.x < -45)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -45, 0), Time.deltaTime * 5);
-            if (deltaPos.x > 45)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 45, 0), Time.deltaTime * 5);
-            if (deltaPos.x > -45 && deltaPos.x < 45)
+            if (deltaPos.x < -10)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, -65, 0), Time.deltaTime * 5);
+            if (deltaPos.x > 10)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 65, 0), Time.deltaTime * 5);
+            if (deltaPos.x > -10 && deltaPos.x < 10)
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * 5);
 
 

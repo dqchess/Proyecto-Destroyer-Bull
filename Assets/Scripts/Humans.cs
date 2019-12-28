@@ -21,7 +21,8 @@ public class Humans : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag =="Male" || other.gameObject.tag == "Kill Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag =="Male" || other.gameObject.tag == "Kill Player" 
+            || other.gameObject.tag == "Forniture")
         {
             animator.enabled = false;
             rb.isKinematic = false;
